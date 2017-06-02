@@ -29,6 +29,7 @@ namespace EOPenServer
                 }
             }
             IPEndPoint localEndPoint = new IPEndPoint(ipAddress, 4510);
+            Console.WriteLine("IP Address: " + ipAddress.ToString());
 
             // Create a TCP/IP socket.  
             Socket listener = new Socket(AddressFamily.InterNetwork,
