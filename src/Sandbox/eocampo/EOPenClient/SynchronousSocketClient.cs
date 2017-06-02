@@ -22,10 +22,14 @@ namespace EOPenClient
                 IPHostEntry ipHostInfo = Dns.GetHostEntry(""); // AddressFamily.InterNetwork
                 //IPAddress ipAddress = ipHostInfo.AddressList[0];
                 IPAddress ipAddress = null;
-                for (int i = 0; i < ipHostInfo.AddressList.LongLength; i++) {
-                    if (ipHostInfo.AddressList[i].AddressFamily == AddressFamily.InterNetwork)
-                        ipAddress = ipHostInfo.AddressList[i];
-                }
+                //for (int i = 0; i < ipHostInfo.AddressList.LongLength; i++) {
+                //    if (ipHostInfo.AddressList[i].AddressFamily == AddressFamily.InterNetwork)
+                //        ipAddress = ipHostInfo.AddressList[i];
+                //}
+                Console.Write("Enter Server's IP Address: ");
+                string ipAddressString = Console.ReadLine();
+                ipAddress = IPAddress.Parse(ipAddressString);
+
                 IPEndPoint remoteEP = new IPEndPoint(ipAddress, 4510);
 
                 // Create a TCP/IP  socket.  
