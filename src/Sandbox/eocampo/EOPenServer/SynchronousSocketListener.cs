@@ -23,8 +23,10 @@ namespace EOPenServer
             //IPAddress ipAddress = ipHostInfo.AddressList[0];
             IPAddress ipAddress = null;
             for (int i = 0; i < ipHostInfo.AddressList.LongLength; i++) {
-                if (ipHostInfo.AddressList[i].AddressFamily == AddressFamily.InterNetwork)
+                if (ipHostInfo.AddressList[i].AddressFamily == AddressFamily.InterNetwork) {
                     ipAddress = ipHostInfo.AddressList[i];
+                    break;
+                }
             }
             IPEndPoint localEndPoint = new IPEndPoint(ipAddress, 4510);
 
