@@ -22,10 +22,15 @@ namespace EOPenServer
             IPHostEntry ipHostInfo = Dns.GetHostEntry(""); // AddressFamily.InterNetwork
             //IPAddress ipAddress = ipHostInfo.AddressList[0];
             IPAddress ipAddress = null;
-            for (int i = 0; i < ipHostInfo.AddressList.LongLength; i++) {
+            foreach(var element in ipHostInfo.AddressList)
+            {
+                //Console.WriteLine(element);
+            }            
+            for (int i = 0; i < ipHostInfo.AddressList.LongLength; i++) {                
                 if (ipHostInfo.AddressList[i].AddressFamily == AddressFamily.InterNetwork)
                     ipAddress = ipHostInfo.AddressList[i];
             }
+            Console.WriteLine(ipAddress);
             IPEndPoint localEndPoint = new IPEndPoint(ipAddress, 4510);
 
             // Create a TCP/IP socket.  
