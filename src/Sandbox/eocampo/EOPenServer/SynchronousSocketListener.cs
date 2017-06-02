@@ -22,12 +22,33 @@ namespace EOPenServer
             IPHostEntry ipHostInfo = Dns.GetHostEntry(""); // AddressFamily.InterNetwork
             //IPAddress ipAddress = ipHostInfo.AddressList[0];
             IPAddress ipAddress = null;
-            for (int i = 0; i < ipHostInfo.AddressList.LongLength; i++) {
-                if (ipHostInfo.AddressList[i].AddressFamily == AddressFamily.InterNetwork) {
-                    ipAddress = ipHostInfo.AddressList[i];
-                    break;
+            IPAddress[] validAddressList = new IPAddress[ipHostInfo.AddressList.Length]; 
+            
+            {
+                int n = 0;
+                for (int i = 0; i < ipHostInfo.AddressList.Length; i++) {
+                    if (ipHostInfo.AddressList[i].AddressFamily == AddressFamily.InterNetwork) {
+                        validAddressList[n++] = ipHostInfo.AddressList[i];
+                        // break;
+                    }
                 }
             }
+
+            if (validAddressList.Length > 1) {
+                for (int i = 0; i < validAddressList.Length; i++){
+                    if (validAddressList[i] == null)
+                        break;
+                    Console.WriteLine(string.Format("{0} - {1}", (i+1).ToString(), validAddressList[i].ToString()));
+                }
+                Console.WriteLine("En qué dirección quieres levantar el server: ");
+                string response = Console.ReadLine();
+                int intRes = int.Parse(response);
+                ipAddress = validAddressList[intRes-1];
+            }
+            else {
+                ipAddress = validAddressList[0];
+            }
+            
             IPEndPoint localEndPoint = new IPEndPoint(ipAddress, 4510);
             Console.WriteLine("IP Address: " + ipAddress.ToString());
 

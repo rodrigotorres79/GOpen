@@ -11,7 +11,9 @@ namespace EOPenClient
     class Program
     {
         static void Main(string[] args) {
-            SynchronousSocketClient.StartClient(); 
+            SynchronousSocketClient.StartClient();
+            Console.WriteLine("Press enter");
+            Console.ReadLine();
         }
     }
 }
